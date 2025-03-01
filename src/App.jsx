@@ -1,16 +1,17 @@
-import { useState } from 'react'
-
 import './App.css'
 import Navbar from './components/Navbar'
+import { Outlet } from 'react-router-dom'
+import Home from './home/Home'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
-    <div className='min-h-screen'>
+    <>
     <Navbar/>
-    
-    </div>
+    <Outlet/>
+    {/* <Home/> */}
+    </>
   )
 }
 
