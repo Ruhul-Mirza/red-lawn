@@ -73,25 +73,18 @@ const Navbar = () => {
   const products = [
     { label: "New Arrivals", href: "/products/new" },
     { label: "Best Sellers", href: "/products/best-sellers" },
-    { label: "Sale", href: "/products/sale" },
-    { label: "Collections", href: "/products/collections" },
-    { label: "Limited Edition", href: "/products/limited-edition" },
   ];
 
   const categories = [
     { label: "Men", href: "/categories/men" },
     { label: "Women", href: "/categories/women" },
     { label: "Kids", href: "/categories/kids" },
-    { label: "Accessories", href: "/categories/accessories" },
-    { label: "Home Decor", href: "/categories/home-decor" },
+   
   ];
 
   const support = [
     { label: "Contact Us", href: "/support/contact" },
     { label: "FAQs", href: "/support/faqs" },
-    { label: "Shipping & Returns", href: "/support/shipping" },
-    { label: "Size Guide", href: "/support/size-guide" },
-    { label: "Track Order", href: "/support/track-order" },
   ];
 
   return (
