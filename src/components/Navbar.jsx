@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import logo from "../../images/logo.png";
 import {
   Heart,
@@ -9,6 +9,8 @@ import {
   X,
   Search,
 } from "lucide-react";
+import { CartContext } from "../context/CartContext";
+import { Link } from "react-router-dom";
 
 const Dropdown = ({ title, items }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,6 +59,8 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
+  const { cartItems } = useContext(CartContext);
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
@@ -79,7 +83,6 @@ const Navbar = () => {
     { label: "Men", href: "/categories/men" },
     { label: "Women", href: "/categories/women" },
     { label: "Kids", href: "/categories/kids" },
-   
   ];
 
   const support = [
@@ -113,12 +116,6 @@ const Navbar = () => {
             >
               About
             </a>
-            <a
-              href="/contact"
-              className="px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 cursor-pointer rounded-4xl transition-colors font-medium tracking-wide"
-            >
-              Contact
-            </a>
           </nav>
 
           {/* Right side icons - Desktop */}
@@ -143,24 +140,26 @@ const Navbar = () => {
               />
             </button>
 
-            <a
-              href="/cart"
+            <Link
+              to="/cart-item"
               className="p-2.5 rounded-full hover:bg-gray-100 transition-colors relative"
               aria-label="Cart"
             >
               <ShoppingCart className="h-5 w-5 text-gray-700" />
-              <span className="absolute top-0 right-0 h-4 w-4 bg-black rounded-full flex items-center justify-center text-xs text-white">
-                0
-              </span>
-            </a>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
 
-            <a
-              href="/login"
+            <Link
+              to="/login"
               className="ml-2 flex items-center space-x-1.5 px-4 py-2 border border-black text-black rounded-md hover:bg-black hover:text-white transition-colors font-medium text-sm"
             >
               <User className="h-4 w-4" />
               <span>Login</span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile menu controls */}
@@ -177,16 +176,18 @@ const Navbar = () => {
               />
             </button>
 
-            <a
-              href="/cart"
-              className="p-2 rounded-full hover:bg-gray-100 transition-colors relative"
+            <Link
+              to="/cart-item"
+              className="p-2.5 rounded-full hover:bg-gray-100 transition-colors relative"
               aria-label="Cart"
             >
               <ShoppingCart className="h-5 w-5 text-gray-700" />
-              <span className="absolute top-0 right-0 h-4 w-4 bg-black rounded-full flex items-center justify-center text-xs text-white">
-                0
-              </span>
-            </a>
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
+            </Link>
 
             <button
               className="p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
@@ -361,13 +362,13 @@ const Navbar = () => {
             </nav>
 
             <div className="pt-6 border-t border-gray-100">
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className="flex items-center justify-center space-x-2 w-full px-4 py-3 border border-black text-black rounded-md hover:bg-black hover:text-white transition-colors font-medium"
               >
                 <User className="h-5 w-5" />
                 <span>Login / Register</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -377,3 +378,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import background from "../../images/herobg.png"
 import { ArrowRight, Star } from 'lucide-react';
-import Card from "./Card";
-import BrideCollection from './BrideCollection';
+import Card from "../components/Card";
+import BrideCollection from '../components/BrideCollection';
+import NewArrivals from '../components/NewArrival';
 
 function Home() {
   // Simple fade-in animation on component mount
@@ -79,6 +80,7 @@ function Home() {
       </section>
       <BrideCollection/>
       <Card/>
+      <NewArrivals/>
     </>
   );
 }
