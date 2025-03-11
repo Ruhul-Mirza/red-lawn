@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import background from "../../images/herobg.png"
 import { ArrowRight, Star } from 'lucide-react';
-import Card from "../components/Card";
 import BrideCollection from '../components/BrideCollection';
-import NewArrivals from '../components/NewArrival';
+import NewArrivalSection from '../components/NewArrivalSection';
+import BestSellerSection from '../components/BestSellerSection';
 
 function Home() {
-  // Simple fade-in animation on component mount
+  
   useEffect(() => {
     const heroSection = document.getElementById('hero-section');
     if (heroSection) {
@@ -79,8 +79,8 @@ function Home() {
         </div>
       </section>
       <BrideCollection/>
-      <Card/>
-      <NewArrivals/>
+      <NewArrivalSection/>
+      <BestSellerSection/>
     </>
   );
 }

@@ -16,10 +16,39 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
-      const isItemInCart = prevItems.find((cartItem) => cartItem.id === item.id);
-      return isItemInCart ? prevItems : [...prevItems, item];
+      const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
+      if (existingItem) {
+        return prevItems.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, count: (cartItem.count || 1) + 1 }
+            : cartItem
+        );
+      } else {
+        // Add new item with count 1
+        return [...prevItems, { ...item, count: 1 }];
+      }
     });
   };
+  const increaseQuantity = (itemId) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? { ...item, count: (item.count || 1) + 1 } : item
+      )
+    );
+  };
+  
+  const decreaseQuantity = (itemId) => {
+    setCartItems((prevItems) =>
+      prevItems
+        .map((item) =>
+          item.id === itemId
+            ? { ...item, count: item.count > 1 ? item.count - 1 : 1 }
+            : item
+        )
+        .filter((item) => item.count > 0) // optional: remove item if count is 0
+    );
+  };
+  
 
   const removeFromCart = (itemId) => {
     setCartItems((prevItems) => {
@@ -30,13 +59,18 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ 
-      cartItems, 
-      addToCart, 
-      removeFromCart, 
-      cartCount: cartItems.length 
-    }}>
-      {children}
-    </CartContext.Provider>
+<CartContext.Provider
+  value={{
+    cartItems,
+    addToCart,
+    removeFromCart,
+    increaseQuantity,
+    decreaseQuantity,
+    cartCount: cartItems.length,
+  }}
+>
+  {children}
+</CartContext.Provider>
+
   );
 };
